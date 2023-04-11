@@ -108,14 +108,23 @@ def main():
     # TODO: Run the program 5 times for each offloading mode, and record the total execution time
     #   Compute the mean and standard deviation of the execution times
     #   Hint: store the results in a pandas DataFrame, use previous labs as a reference
-
-
+    sum1 = 0
+    sum2 = 0 
+    sum3 = 0
+    data = []
+    for i in 5:
+        sum1 += run("process1")
+        sum2 += run("process2")
+        sum3 += run("both")
+    data.append({sum1/5, sum2/5, sum3/5}, {np.sqrt(sum1/5), np.sqrt(sum2/5), np.sqrt(sum3/5)})
     # TODO: Plot makespans (total execution time) as a bar chart with error bars
     # Make sure to include a title and x and y labels
+    df = pd.DataFrame(data, columns =['Mean Process 1', 'Standard Deviation 1'])
 
+    fig = px.bar(df, x = "Mean Processes", error_y = "Standard Deviation")
 
     # TODO: save plot to "makespan.png"
-
+    fig.write_image("makespan.png")
 
     # Question 4: What is the best offloading mode? Why do you think that is?
     # Question 5: What is the worst offloading mode? Why do you think that is?
