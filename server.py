@@ -12,7 +12,7 @@ def index():
 # TODO: Create a flask app with two routes, one for each function.
 # The route should get the data from the request, call the function, and return the result.
 
-@app.route('process1', methods=['POST'])
+@app.route('/process1', methods=['POST'])
 def p1():
    """
    Summary: cslls process1
@@ -26,7 +26,7 @@ def p1():
    res.status_code = 200
    return res
 
-@app.route('process2', methods=['GET'])
+@app.route('/process2', methods=['GET'])
 def p2():
    """
    Summary: cslls process2
@@ -40,3 +40,6 @@ def p2():
    res = jsonify(process2(data))
    res.status_code = 200
    return res
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=8000)
