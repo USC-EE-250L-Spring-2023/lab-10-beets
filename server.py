@@ -15,7 +15,7 @@ def index():
 @app.route('/process1', methods=['POST'])
 def p1():
    """
-   Summary: cslls process1
+   Summary: calls process1
    Args:
        data (List[int]): the data
    Returns:
@@ -26,10 +26,10 @@ def p1():
    res.status_code = 200
    return res
 
-@app.route('/process2', methods=['GET'])
+@app.route('/process2', methods=['POST'])
 def p2():
    """
-   Summary: cslls process2
+   Summary: calls process2
    Args:
        data (List[int]): the data
    Returns:
