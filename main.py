@@ -13,6 +13,7 @@ def generate_data() -> List[int]:
 
 def process1(data: List[int]) -> List[int]:
     """TODO: Document this function. What does it do? What are the inputs and outputs?"""
+    #Returns the 
     def foo(x):
         """Find the next largest prime number."""
         while True:
@@ -108,15 +109,15 @@ def main():
     # TODO: Run the program 5 times for each offloading mode, and record the total execution time
     #   Compute the mean and standard deviation of the execution times
     #   Hint: store the results in a pandas DataFrame, use previous labs as a reference
-    sum1 = 0
-    sum2 = 0 
-    sum3 = 0
+    sum1 = 0.0
+    sum2 = 0.0
+    sum3 = 0.0
     data = []
-    for i in 5:
+    for i in range(5):
         sum1 += run("process1")
         sum2 += run("process2")
         sum3 += run("both")
-    data.append({sum1/5, sum2/5, sum3/5}, {np.sqrt(sum1/5), np.sqrt(sum2/5), np.sqrt(sum3/5)})
+    data.append([sum1/5.0, sum2/5.0, sum3/5.0], [np.sqrt(sum1/5.0), np.sqrt(sum2/5.0), np.sqrt(sum3/5.0)])
     # TODO: Plot makespans (total execution time) as a bar chart with error bars
     # Make sure to include a title and x and y labels
     df = pd.DataFrame(data, columns =['Mean Process 1', 'Standard Deviation 1'])
