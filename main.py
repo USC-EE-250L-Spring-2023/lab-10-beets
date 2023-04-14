@@ -107,8 +107,6 @@ def run(offload: Optional[str] = None) -> float:
 
         thread1.join()
         thread2.join()
-        print(data1)
-        print(data2)
     ans = final_process(data1, data2)
     return ans 
 
