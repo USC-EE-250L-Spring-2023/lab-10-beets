@@ -48,15 +48,17 @@ def run(offload: Optional[str] = None) -> float:
         float: the final result of the program.
     """
     data = generate_data()
-    if offload is None: # in this case, we run the program locally
+    if offload == "None": # in this case, we run the program locally
+        print("Here1" )
         data1 = process1(data)
         data2 = process2(data)
     elif offload == 'process1':
+        print("Here2" )
         data1 = None
         def offload_process1(data):
             nonlocal data1
             # TODO: Send a POST request to the server with the input data
-            response = requests.post(f'{offload_url}/process1', data=data)
+            response = requests.post(f'{offload_url}/process1', json=data)
             data1 = response.json()
         thread = threading.Thread(target=offload_process1, args=(data,))
         thread.start()
@@ -68,40 +70,45 @@ def run(offload: Optional[str] = None) -> float:
         #   ChatGPT is also good at explaining the difference between parallel and concurrent execution!
         #   Make sure to cite any sources you use to answer this question.
     elif offload == 'process2':
+        print("Here3" )
         # TODO: Implement this case
         data2 = None
         def offload_process2(data):
             nonlocal data2
             # TODO: Send a POST request to the server with the input data
-            response = requests.post(f'{offload_url}/process2', data=data)
+            response = requests.post(f'{offload_url}/process2', json=data)
             data2 = response.json()
         thread = threading.Thread(target=offload_process2, args=(data,))
         thread.start()
         data1 = process1(data)
         thread.join()
 
-    elif offload == 'both':
+    else:
         # TODO: Implement this case
+        print("Here4" )
+        
         data1 = None
         def offload_process1(data):
             nonlocal data1
             # TODO: Send a POST request to the server with the input data
-            response = requests.post(f'{offload_url}/process1', data=data)
+            response = requests.post(f'{offload_url}/process1', json=data)
             data1 = response.json()
-        thread = threading.Thread(target=offload_process1, args=(data,))
-        thread.start()
+        thread1 = threading.Thread(target=offload_process1, args=(data,))
+        thread1.start()
         
         data2 = None
         def offload_process2(data):
             nonlocal data2
             # TODO: Send a POST request to the server with the input data
-            response = requests.post(f'{offload_url}/process2', data=data)
+            response = requests.post(f'{offload_url}/process2', json=data)
             data2 = response.json()
-        thread = threading.Thread(target=offload_process2, args=(data,))
-        thread.start()
+        thread2 = threading.Thread(target=offload_process2, args=(data,))
+        thread2.start()
 
-        thread.join()
-
+        thread1.join()
+        thread2.join()
+        print(data1)
+        print(data2)
     ans = final_process(data1, data2)
     return ans 
 
@@ -112,7 +119,7 @@ def main():
     time1 = 0
     time2 = 0
     time3 = 0
-    processes = ["none", "process1", "process2", "both"]
+    processes = ["None", "process1", "process2", "both"]
     data = []
     for process in processes:
         times = []
@@ -121,14 +128,14 @@ def main():
             run(process)
             end = time.time()
             times.append(end - start)
-        data.append(str(process), np.mean(times), np.stdev(times))
+        data.append([str(process), np.mean(times), np.std(times)])
 
 
     # TODO: Plot makespans (total execution time) as a bar chart with error bars
     # Make sure to include a title and x and y labels
-    df = pd.DataFrame(data, columns =['', 'Standard Deviation 1'])
+    df = pd.DataFrame(data, columns =['Process Name', 'Mean', 'Standard Deviation'])
 
-    fig = px.bar(df, x = "Mean Processes", error_y = "Standard Deviation")
+    fig = px.bar(df, x = "Mean", error_y = "Standard Deviation")
 
     # TODO: save plot to "makespan.png"
     fig.write_image("makespan.png")
