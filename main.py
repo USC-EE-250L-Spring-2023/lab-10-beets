@@ -135,7 +135,7 @@ def main():
     # Make sure to include a title and x and y labels
     df = pd.DataFrame(data, columns =['Process Name', 'Mean', 'Standard Deviation'])
 
-    fig = px.bar(df, x = "Mean", error_y = "Standard Deviation")
+    fig = px.bar(df, x = "Process Name",y="Mean", error_y = "Standard Deviation")
 
     # TODO: save plot to "makespan.png"
     fig.write_image("makespan.png")
