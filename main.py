@@ -49,11 +49,9 @@ def run(offload: Optional[str] = None) -> float:
     """
     data = generate_data()
     if offload == "None": # in this case, we run the program locally
-        print("Here1" )
         data1 = process1(data)
         data2 = process2(data)
     elif offload == 'process1':
-        print("Here2" )
         data1 = None
         def offload_process1(data):
             nonlocal data1
@@ -70,7 +68,6 @@ def run(offload: Optional[str] = None) -> float:
         #   ChatGPT is also good at explaining the difference between parallel and concurrent execution!
         #   Make sure to cite any sources you use to answer this question.
     elif offload == 'process2':
-        print("Here3" )
         # TODO: Implement this case
         data2 = None
         def offload_process2(data):
@@ -85,7 +82,6 @@ def run(offload: Optional[str] = None) -> float:
 
     else:
         # TODO: Implement this case
-        print("Here4" )
         
         data1 = None
         def offload_process1(data):
