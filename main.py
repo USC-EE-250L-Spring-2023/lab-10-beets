@@ -12,8 +12,12 @@ def generate_data() -> List[int]:
     return np.random.randint(100, 10000, 1000).tolist()
 
 def process1(data: List[int]) -> List[int]:
-    """TODO: Document this function. What does it do? What are the inputs and outputs?"""
-    #Returns the 
+    """Summary: Finds the next largest prime number for each input integer in the list
+        Args:
+    data (List[int]): list of integers
+        Returns:
+    List[int]: list of integers. Each is the next largest prime number for each integer in the input list
+    """
     def foo(x):
         """Find the next largest prime number."""
         while True:
@@ -23,7 +27,12 @@ def process1(data: List[int]) -> List[int]:
     return [foo(x) for x in data]
 
 def process2(data: List[int]) -> List[int]:
-    """TODO: Document this function. What does it do? What are the inputs and outputs?"""
+    """Summary: Finds the next perfect square for each input integer in the list
+    Args:
+        data (List[int]): list of integers
+    Returns:
+        List[int]: list of integers. Each is the next perfect square for each integer in the input list
+    """
     def foo(x):
         """Find the next largest prime number."""
         while True:
@@ -33,7 +42,13 @@ def process2(data: List[int]) -> List[int]:
     return [foo(x) for x in data]
 
 def final_process(data1: List[int], data2: List[int]) -> List[int]:
-    """TODO: Document this function. What does it do? What are the inputs and outputs?"""
+    """Summary: Calculates the mean of the differences between each pair of integers with the same index in the two input lists
+    Args:
+        data1 (List[int]): first list of integers
+        data2 (List[int]): second list of integers
+    Returns:
+        float: Mean of the differences between each pair of integers with the same index in the two input lists as a float
+    """
     return np.mean([x - y for x, y in zip(data1, data2)])
 
 offload_url = 'http://172.20.10.6:8000' # TODO: Change this to the IP address of your server
