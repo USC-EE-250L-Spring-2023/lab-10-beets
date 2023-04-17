@@ -33,4 +33,4 @@ Question 6: The processing functions in the example aren't very likely to be use
 What kind of processing functions would be more likely to be used in a real-world application?
 When would you want to offload these functions to a server?
 
-Answer: ...
+Answer: An example of processing functions used in the real world would be Machine Learning Algorithms or Cryptography. When using processing functions I think the best ones to use would be ones that have better runtimes to maximize efficiency. In the case where there is a lot of power required from the CPU, a server would beneficial since it can offload a task to the server which can free up the amount of work and improve on the performance.
